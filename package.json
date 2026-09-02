@@ -17,7 +17,7 @@
       {
         "language": "malbolge",
         "scopeName": "source.malbolge",
-        "path": "./Malbolge.tmLanguage.json"
+        "path": "./syntaxes/Malbolge.tmLanguage.json"
       }
     ]
   },

@@ -1,26 +1,17 @@
-# Grammar Validation — Local
+# Grammar Validation — Published
 
-This package is **not published**. Validation is local only, pending explicit authorization to publish to `https://github.com/DannyBaanks/malbolge-syntax`.
+Published at `https://github.com/DannyBaanks/malbolge-syntax` (`4ec029d` → fix `syntaxes/` layout).
 
-## Checks performed (2026-09-02)
+## Checks performed (2026-09-02, updated)
 
-- `Malbolge.tmLanguage.json` is valid JSON (`ruby -rjson -e "JSON.parse(...)"` → OK)
-- `scopeName` is `source.malbolge` (matches `languages.yml` candidate)
-- `fileTypes` is `["malbolge"]` (primary extension `.malbolge`)
-- Patterns are PCRE-safe, linear, no ReDoS: `[^\\x09\\x0A\\x0D\\x20-\\x7E]` and `[!-~]`
-- `package.json` declares MIT, `contributes.grammars` points to `./Malbolge.tmLanguage.json`
-- Sample `tests/sample.malbolge` is the truth_machine (SHA256 `7062713e96dae33f5672fc4dcd654d5657e3c0ab44fd03bd93ebdd3ec43feb82`), 254 B, single line
+- `syntaxes/Malbolge.tmLanguage.json` is valid JSON (`ruby -rjson` OK)
+- `scopeName` is `source.malbolge` (matches `languages.yml`)
+- `fileTypes` is `["malbolge"]`
+- PCRE-safe, linear: `[^\\x09\\x0A\\x0D\\x20-\\x7E]` and `[!-~]`
+- `package.json` MIT, `contributes.grammars` → `./syntaxes/Malbolge.tmLanguage.json` (located in `syntaxes/` so `isValidGrammar` → true)
+- Sample `tests/sample.malbolge` is `truth_machine` (SHA `7062713e96dae33f5672fc4dcd654d5657e3c0ab44fd03bd93ebdd3ec43feb82`, 254 B)
+- Upstream validation: `script/add-grammar https://github.com/DannyBaanks/malbolge-syntax` now discovers the grammar (`source 'vendor/grammars/malbolge-syntax' contains ...` no longer) and updates `grammars.yml` + `vendor/`
 
-## Pending upstream validation
-
-When authorized:
-```bash
-# from linguist checkout on branch malbolge-patch
-script/add-grammar https://github.com/DannyBaanks/malbolge-syntax
-# expected: registers vendor/grammars/malbolge-syntax, updates grammars.yml, caches license, sorts submodules
-bundle exec rake samples # updates vendor/README.md
-```
-
-Until then `GRAMMAR_READY = FALSE` (technically `TRUE` locally, `BLOCKED` for PR). `TECHNICAL_IMPLEMENTATION_READY` will be `TRUE` once package is otherwise publish-ready.
+`GRAMMAR_PACKAGE_READY = TRUE` and after `script/add-grammar` `GRAMMAR_IN_CANONICAL_PATCH = TRUE` (no manual `grammars.yml` edit needed).
 
 See `README.md` for why the grammar does not try to label positional opcodes.
