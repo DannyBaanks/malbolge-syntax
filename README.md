@@ -1,35 +1,35 @@
-# malbolge-syntax — TextMate grammar for Malbolge
+# malbolge-syntax — Gramatica TextMate para Malbolge
 
-MIT-licensed TextMate grammar for [Malbolge](https://esolangs.org/wiki/Malbolge), published for `github-linguist/linguist`.
+Gramatica TextMate con licencia MIT para [Malbolge](https://esolangs.org/wiki/Malbolge), publicada para `github-linguist/linguist`.
 
-- **Scope**: `source.malbolge`
-- **File**: `syntaxes/Malbolge.tmLanguage.json`
+- **Alcance**: `source.malbolge`
+- **Archivo**: `syntaxes/Malbolge.tmLanguage.json`
 - **Version**: 0.1.0
-- **License**: MIT
-- **Published**: `https://github.com/DannyBaanks/malbolge-syntax` at `4ec029d` (initial) → fix `syntaxes/` layout (this commit)
+- **Licencia**: MIT
+- **Publicado**: `https://github.com/DannyBaanks/malbolge-syntax` en `4ec029d` (inicial) → fix de layout en `syntaxes/` (este commit)
 
-## Scope
+## Alcance
 
-`source.malbolge` recognizes printable ASCII source characters and marks other non-whitespace bytes as invalid. It intentionally does **not** label individual source characters as `i`, `o`, `*`, `p`, `/`, `<`, `v`, or `j` instructions.
+`source.malbolge` reconoce caracteres ASCII imprimibles del fuente y marca los demas bytes que no son whitespace como invalidos. Intencionalmente **no** etiqueta caracteres individuales del fuente como instrucciones `i`, `o`, `*`, `p`, `/`, `<`, `v` o `j`.
 
-In Malbolge, a printable source character is normalized relative to its position after whitespace removal. The effective opcode is calculated from that position, and later self-encryption changes the runtime instruction again. TextMate regular expressions do not maintain the required modulo-94 positional state. Highlighting a character as an opcode based on its glyph would make a false semantic claim. The grammar highlights valid source uniformly instead of mislabeling arbitrary bytes as instructions.
+En Malbolge, un caracter imprimible del fuente se normaliza con respecto a su posicion despues de quitar el whitespace. El opcode efectivo se calcula a partir de esa posicion, y el auto-cifrado posterior cambia la instruccion en tiempo de ejecucion otra vez. Las expresiones regulares de TextMate no mantienen el estado posicional mod-94 que se necesita. Resaltar un caracter como opcode basandose en su glyph seria una afirmacion semantica falsa. La gramatica resalta el fuente de forma uniforme en lugar de etiquetar bytes arbitrarios como instrucciones.
 
-## Installation (VS Code)
+## Instalacion (VS Code)
 
-This grammar is consumed via `github-linguist/linguist` (`grammars.yml` → `vendor/grammars/malbolge-syntax`). For local VS Code use, copy `syntaxes/Malbolge.tmLanguage.json` and reference it via `package.json` `contributes.grammars`.
+Esta gramatica se consume via `github-linguist/linguist` (`grammars.yml` → `vendor/grammars/malbolge-syntax`). Para uso local en VS Code, copia `syntaxes/Malbolge.tmLanguage.json` y referencialo via `package.json` `contributes.grammars`.
 
-## Validation
+## Validacion
 
-- `syntaxes/Malbolge.tmLanguage.json` is valid JSON (`ruby -rjson` OK), `scopeName` `source.malbolge`, `fileTypes` `["malbolge"]`
-- PCRE-safe, linear patterns: `[^\\x09\\x0A\\x0D\\x20-\\x7E]` and `[!-~]`
-- Locates in `syntaxes/` so `github-linguist` `grammar-compiler` discovers it (`isValidGrammar` requires `.../syntaxes/*.json` or `.../grammars/*.json`)
-- Sample `tests/sample.malbolge` is the `truth_machine` (SHA `7062713e96dae33f5672fc4dcd654d5657e3c0ab44fd03bd93ebdd3ec43feb82`, 254 B)
-- Tested via `script/add-grammar https://github.com/DannyBaanks/malbolge-syntax` from clean `linguist` checkout (see `DannyBaanks/malbolge-linguist` `evidence/patches/malbolge.patch`)
+- `syntaxes/Malbolge.tmLanguage.json` es JSON valido (`ruby -rjson` OK), `scopeName` `source.malbolge`, `fileTypes` `["malbolge"]`
+- Seguro para PCRE, patrones lineales: `[^\\x09\\x0A\\x0D\\x20-\\x7E]` y `[!-~]`
+- Ubicado en `syntaxes/` para que `grammar-compiler` de `github-linguist` lo descubra (`isValidGrammar` requiere `.../syntaxes/*.json` o `.../grammars/*.json`)
+- El sample `tests/sample.malbolge` es el `truth_machine` (SHA `7062713e96dae33f5672fc4dcd654d5657e3c0ab44fd03bd93ebdd3ec43feb82`, 254 B)
+- Probado via `script/add-grammar https://github.com/DannyBaanks/malbolge-syntax` desde un checkout limpio de `linguist` (ver `DannyBaanks/malbolge-linguist` `evidence/patches/malbolge.patch`)
 
 ## Upstream
 
-Used by `DannyBaanks/malbolge-linguist` `malbolge-patch` (`grammars.yml` `vendor/grammars/malbolge-syntax: - source.malbolge`, `languages.yml` `tm_scope: source.malbolge`).
+Usado por `DannyBaanks/malbolge-linguist` `malbolge-patch` (`grammars.yml` `vendor/grammars/malbolge-syntax: - source.malbolge`, `languages.yml` `tm_scope: source.malbolge`).
 
-## License
+## Licencia
 
-MIT — see `LICENSE`.
+MIT — ver `LICENSE`.
